@@ -1,0 +1,91 @@
+
+###
+FILTER
+/* TODO FILTER
+
+    @Override
+    public Page<Recreation> findFiltered(String category, String status, Long addressId,
+                                    LocalDateTime openingTime, LocalDateTime closingTime,
+                                    Long availableSits, Pageable pageable) {
+        return placeRepository.findAll(getFilteredSpecification(category, status, addressId, openingTime, closingTime, availableSits), pageable);
+    }
+
+
+    private static Specification<Place> getFilteredSpecification(
+            final String category,
+            final String status,
+            final Long addressId,
+            final LocalDateTime openingTime,
+            final LocalDateTime closingTime,
+            final Long availableSits) {
+
+        return (root, query, criteriaBuilder) -> {
+
+            List<Predicate> predicateList = new LinkedList<>();
+            if (category != null) {
+                predicateList.add(criteriaBuilder.like(root.get("placeCategory"), PlaceCategory.valueOf(category)));
+            }
+            if (status != null) {
+                predicateList.add(criteriaBuilder.like(root.get("placeStatus"), status));
+            }
+            if (addressId != null) {
+                predicateList.add(criteriaBuilder.equal(root.get("address"), addressId));
+            }
+            if (openingTime != null) {
+                predicateList.add(criteriaBuilder.lessThanOrEqualTo(root.get("openingTime"), openingTime));
+            }
+            if (closingTime != null) {
+                predicateList.add(criteriaBuilder.greaterThanOrEqualTo(root.get("closingTime"), closingTime));
+            }
+            if (availableSits != null) {
+                predicateList.add(criteriaBuilder.greaterThanOrEqualTo(root.get("availableSits"), availableSits));
+            }
+            return criteriaBuilder.and(predicateList.toArray(new Predicate[0]));
+        };
+    }*/
+    /* @GetMapping(value = "/filter")
+        public HttpEntity<?> getFilteredPlaces(@RequestParam(name = "placeCategory", defaultValue = "", required = false) String category,
+                                               @RequestParam(name = "status", defaultValue = "", required = false) String status,
+                                               @RequestParam(name = "address", defaultValue = "", required = false) Long address,
+                                               @RequestParam(name = "openingTime", defaultValue = "", required = false) LocalDateTime openingTime,
+                                               @RequestParam(name = "closingTime", defaultValue = "", required = false) LocalDateTime closingTime,
+                                               @RequestParam(name = "availableSits", defaultValue = "", required = false) Long availableSits) {
+            Pageable pageable = PageRequest.of(0, 10);
+            Page<Place> placePage = placeService.findFiltered(category, status, address, openingTime, closingTime, availableSits, pageable);
+            return ResponseEntity.ok(placePage.toList());
+        }*/
+
+###
+//TODO CITIZEN ID VALIDATION
+
+    /*public ResponseEntity<?> validateCitizenId(String citizenId) {
+
+        String citizenURL = url + citizenId;
+        HMACDTO hmacHeader = hmacUtil.getHmacHeader();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.set("sm-keyId", hmacHeader.getKeyId());
+        headers.set("sm-timestamp", hmacHeader.getTimestamp());
+        headers.set("sm-action", hmacHeader.getAction());
+        headers.set("sm-signature", hmacHeader.getSecretKey());
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        restTemplate.setErrorHandler(new ClientErrorHandler());
+        try {
+            ResponseEntity<String> exchange = restTemplate.exchange(citizenURL, HttpMethod.GET, entity, String.class);
+            System.out.println(exchange);
+            HttpStatus httpStatus = exchange.getStatusCode();
+            if (!httpStatus.isError()) {
+                return ResponseEntity.status(HttpStatus.OK).body(exchange);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exchange);
+            }
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error! [citizen] not found! ID:" + citizenId);
+        }
+    }
+*/
+ /*System.out.println(hmacProperties.getKeyId() + ", " +
+                    hmacProperties.getAction() + ", " +
+                    hmacProperties.getMainPath() + ", " +
+                    hmacProperties.getSecretKey() + ", " +
+                    reqBody);*/
